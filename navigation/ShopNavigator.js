@@ -1,4 +1,5 @@
-import { createStackNavigator, createAppContainer } from "react-navigation-stack";
+import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation"
 import { Platform } from "react-native";
 
 import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
