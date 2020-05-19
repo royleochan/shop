@@ -20,6 +20,7 @@ const EditProductScreen = (props) => {
     state.products.userProducts.find((prod) => prod.id === prodId)
   );
 
+  const [titleIsValid, setTitleIsValid] = useState(false);
   const [title, setTitle] = useState(editedProduct ? editedProduct.title : "");
   const [imageUrl, setImageUrl] = useState(
     editedProduct ? editedProduct.imageUrl : ""
@@ -31,6 +32,12 @@ const EditProductScreen = (props) => {
 
   // empty array to prevent infinite loop
   const submitHandler = useCallback(() => {
+    if (!titleIsValid) {
+      Alert.alert("Invalid input!", "Please check errors in the form", [
+        { text: "okay" },
+      ]);
+      return;
+    }
     if (editedProduct) {
       dispatch(
         productsActions.updateProduct(prodId, title, description, imageUrl)
@@ -47,6 +54,15 @@ const EditProductScreen = (props) => {
     props.navigation.setParams({ submit: submitHandler });
   }, [submitHandler]);
 
+  const titleChangeHandler = (text) => {
+    if (text.trim().length === 0) {
+      setTitleIsValid(false);
+    } else {
+      setTitleIsValid(true);
+    }
+    setTitle(text);
+  };
+
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -55,12 +71,13 @@ const EditProductScreen = (props) => {
           <TextInput
             style={styles.input}
             value={title}
-            onChangeText={(text) => setTitle(text)}
-            keyboardType='default'
-            autoCapitalize='sentences'
+            onChangeText={titleChangeHandler}
+            keyboardType="default"
+            autoCapitalize="sentences"
             autoCorrect={false}
-            returnKeyType='next'
+            returnKeyType="next"
           />
+          {!titleIsValid && <Text>Please enter valid title</Text>}
         </View>
         <View style={styles.formControl}>
           <Text style={styles.label}>Image URL</Text>
@@ -77,7 +94,7 @@ const EditProductScreen = (props) => {
               style={styles.input}
               value={price}
               onChangeText={(text) => setPrice(text)}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
             />
           </View>
         )}
