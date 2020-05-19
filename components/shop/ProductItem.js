@@ -77,11 +77,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    height: "25%",
+    height: "23%",
   },
   details: {
     alignItems: "center",
-    height: "15%",
+    height: "17%",
     padding: 10,
   },
 });
