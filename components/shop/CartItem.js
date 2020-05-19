@@ -17,7 +17,7 @@ const CartItem = (props) => {
       </Text>
       <View style={styles.itemData}>
         <Text style={styles.title}>${props.amount}</Text>
-        <TouchableOpacity onPress={props.OnRemove} style={styles.deleteButton}>
+        <TouchableOpacity onPress={props.onRemove} style={styles.deleteButton}>
           <Ionicons
             name={Platform.OS === "android" ? "md-trash" : "ios-trash"}
             size={23}
