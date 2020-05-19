@@ -23,6 +23,7 @@ const OrderItem = (props) => {
         <View>
           {props.items.map((item) => (
             <CartItem
+              key={item.id}
               quantity={item.quantity}
               amount={item.sum}
               title={item.productTitle}
