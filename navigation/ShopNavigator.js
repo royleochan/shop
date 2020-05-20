@@ -4,6 +4,7 @@ import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { createSwitchNavigator } from "react-navigation";
 
 import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
@@ -11,7 +12,8 @@ import CartScreen from "../screens/shop/CartScreen";
 import OrdersScreen from "../screens/shop/OrdersScreen";
 import Colors from "../constants/Colors";
 import UserProductsScreen from "../screens/user/UserProductsScreen";
-import EditProductScreen from '../screens/user/EditProductScreen'
+import EditProductScreen from "../screens/user/EditProductScreen";
+import AuthScreen from "../screens/user/AuthScreen";
 
 const defaultNavOptions = {
   headerStyle: {
@@ -49,7 +51,7 @@ const ProductsNavigator = createStackNavigator(
 const OrdersNavigator = createStackNavigator(
   {
     Orders: OrdersScreen,
-    EditProduct: EditProductScreen
+    EditProduct: EditProductScreen,
   },
   {
     navigationOptions: {
@@ -65,11 +67,10 @@ const OrdersNavigator = createStackNavigator(
   }
 );
 
-
 const AdminNavigator = createStackNavigator(
   {
     UserProducts: UserProductsScreen,
-    EditProduct: EditProductScreen
+    EditProduct: EditProductScreen,
   },
   {
     navigationOptions: {
@@ -89,7 +90,7 @@ const ShopNavigator = createDrawerNavigator(
   {
     Products: ProductsNavigator,
     Orders: OrdersNavigator,
-    Admin: AdminNavigator
+    Admin: AdminNavigator,
   },
   {
     contentOptions: {
@@ -98,6 +99,18 @@ const ShopNavigator = createDrawerNavigator(
   }
 );
 
+const AuthNavigator = createStackNavigator(
+  {
+    Auth: AuthScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavOptions,
+  }
+);
 
+const MainNavigator = createSwitchNavigator({
+  Auth: AuthNavigator,
+  Shop: ShopNavigator,
+});
 
-export default createAppContainer(ShopNavigator);
+export default createAppContainer(MainNavigator);
