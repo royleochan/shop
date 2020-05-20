@@ -75,7 +75,7 @@ const ProductsOverviewScreen = (props) => {
     );
   }
 
-  if (isLoading) {
+  if (isRefreshing) {
     return (
       <View style={styles.centered}>
         <ActivityIndicator size="large" color={Colors.primary} />
