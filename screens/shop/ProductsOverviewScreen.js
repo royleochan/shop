@@ -6,6 +6,7 @@ import {
   FlatList,
   Platform,
   ActivityIndicator,
+  Text,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -42,6 +43,14 @@ const ProductsOverviewScreen = (props) => {
     return (
       <View style={styles.centered}>
         <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
+
+  if (!isLoading && products.length === 0) {
+    return (
+      <View style={styles.centered}>
+        <Text>No products found, start adding some :)</Text>
       </View>
     );
   }
