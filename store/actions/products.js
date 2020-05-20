@@ -10,7 +10,7 @@ export const fetchProducts = () => {
     // any async code can be inserted here
     try {
       const response = await fetch(
-        "https://rn-shop-app-494cc.firebaseio.com/products.jon"
+        "https://rn-shop-app-494cc.firebaseio.com/products.json"
       );
 
       if (!response.ok) {
@@ -31,11 +31,12 @@ export const fetchProducts = () => {
           )
         );
       }
+      
+      dispatch({ type: SET_PRODUCTS, products: loadedProducts });
     } catch (err) {
       throw err;
     }
 
-    dispatch({ type: SET_PRODUCTS, products: loadedProducts });
   };
 };
 
